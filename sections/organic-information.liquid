@@ -1,0 +1,191 @@
+{% assign default_check = section.settings.enable_section %}
+{% assign section_small_text = section.settings.section_small_text %}
+{% assign section_heading = section.settings.section_text %}
+{% assign left_image = section.settings.left_image %}
+{% assign middle_small_heading = section.settings.middle_small_heading %}
+{% assign middle_heading = section.settings.middle_heading %}
+{% assign middle_tab = section.settings.middle_tab %}
+{% assign middle_list = section.settings.middle_list %}
+{% assign middle_question = section.settings.middle_question %}
+{% assign middle_info = section.settings.middle_info %}
+{% assign right_image = section.settings.right_image %}
+
+{% if default_check %}
+  <!-- why-sec start -->
+  <section class="why-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-heading-2">
+            {% if section_small_text != blank %}
+              <p>{{ section_small_text }}</p>
+            {% endif %}
+            {% if section_heading != blank %}
+              <h2>{{ section_heading }}</h2>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          {% if section.settings.enable_image %}
+            {% if left_image != blank %}
+              <div class="why-img">
+                <img src="{{ left_image | img_url: 'master' }}" alt="" width="" height="">
+              </div>
+            {% endif %}
+          {% endif %}
+          {% if section.settings.enable_video %}
+            {% if section.settings.left_video != blank %}
+              <div class="why-img">
+                <video loop muted playsinline controls autoplay="true" width="650px" height="500px">
+                  <source src="{{ section.settings.left_video.sources[0].url }}" type="video/mp4">
+                </video>
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+        <div class="col-lg-6">
+          <div class="why-content">
+            {% if middle_small_heading != blank %}
+              <p>{{ middle_small_heading }}</p>
+            {% endif %}
+            <div class="why-heading">
+              <div class="why-icon">
+                <i class="fa-solid fa-volume-high"></i>
+              </div>
+              {% if middle_heading != blank %}
+                <h3>{{ middle_heading }}</h3>
+              {% endif %}
+            </div>
+            {% if middle_tab != blank %}
+              <div class="why-tag-box">
+                {{ middle_tab }}
+              </div>
+            {% endif %}
+            {% if middle_list != blank %}
+              <div class="why-list">
+                {{ middle_list }}
+              </div>
+            {% endif %}
+            {% if middle_question != blank %}
+              <h4>{{ middle_question }}</h4>
+            {% endif %}
+            {% if middle_info != blank %}
+              <div class="why-btn-box">
+                {{ middle_info }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-3">
+          {% if right_image != blank %}
+            <div class="why-img">
+              <img src="{{ right_image | img_url: 'master' }}" alt="" width="" height="">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- why-sec end -->
+{% endif %}
+
+{% schema %}
+{
+    "name": "Organic Information",
+    "class": "organic-information",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the banner section."
+        },
+        {
+            "type": "text",
+            "id": "section_small_text",
+            "label": "Section Small Heading",
+            "default": "But you may ask",
+            "info": "Add section small text here"
+        },
+        {
+            "type": "text",
+            "id": "section_text",
+            "label": "Section Heading",
+            "default": "Why do we do it?",
+            "info": "Add section text here"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_image",
+            "label": "Enable Image",
+            "info": "Check to enable the image."
+        },
+        {
+            "type": "image_picker",
+            "id": "left_image",
+            "label": "Left Image"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_video",
+            "label": "Enable Video",
+            "info": "Check to enable the video."
+        },
+        {
+            "type": "video",
+            "id": "left_video",
+            "label": "Left Video"
+        },
+        {
+            "type": "text",
+            "id": "middle_small_heading",
+            "label": "Middle Small Heading",
+            "default": "But How?"
+        },
+        {
+            "type": "text",
+            "id": "middle_heading",
+            "label": "Middle Heading",
+            "default": "#GoNemical"
+        },
+        {
+            "type": "textarea",
+            "id": "middle_tab",
+            "label": "Middle Tab",
+            "default": "<p>Overview</p><p>Why</p><p>Where</p>"
+        },
+        {
+            "type": "richtext",
+            "id": "middle_list",
+            "label": "Middle List",
+            "default": "<p>Test</p>"
+        },
+        {
+            "type": "text",
+            "id": "middle_question",
+            "label": "Middle Question",
+            "default": "Where do we see this Go?"
+        },
+        {
+            "type": "textarea",
+            "id": "middle_info",
+            "label": "Middle Information",
+            "default": "<p><span>1000+ Farmers </span> in the Ecosystem</p><p><span>10+ Product </span> types</p><p><span>10000+ Customers </span> Benefitted</p>"
+        },
+        {
+            "type": "image_picker",
+            "id": "right_image",
+            "label": "Right Image"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Information",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

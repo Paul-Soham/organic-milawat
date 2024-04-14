@@ -1,0 +1,101 @@
+<!-- health sec start -->
+<section class="health-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-heading-2">
+          {% if section.settings.health_tips_text != blank %}
+            <p>{{ section.settings.health_tips_text }}</p>
+          {% endif %}
+          {% if section.settings.health_tips_heading != blank %}
+            <h2>{{ section.settings.health_tips_heading }}</h2>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      {% for block in section.blocks %}
+      <div class="col-lg-3 col-6">
+        <div class="health-item">
+          {% if block.settings.health_tips_image != blank %}
+            <img src="{{ block.settings.health_tips_image | img_url: 'master' }}" alt="" width="" height="">
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="health-btn-box">
+          {% if section.settings.community_button_link != blank and section.settings.community_button != blank %}
+            <a href="{{ section.settings.community_button_link }}">{{ section.settings.community_button }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- health sec end -->
+
+{% schema %}
+{
+    "name": "Organic Health Tips",
+    "class": "organic-tips",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the health tips section."
+        },
+        {
+            "type": "text",
+            "id": "health_tips_text",
+            "label": "Health Tips Text",
+            "default": "If you want to be updated with",
+            "info": "Add introductory text for the health tips section."
+        },
+        {
+            "type": "text",
+            "id": "health_tips_heading",
+            "label": "Health Tips Headline",
+            "default": "Health Tips",
+            "info": "Add a heading to show the health tips."
+        },
+        {
+            "type": "text",
+            "id": "community_button",
+            "label": "Community Button",
+            "default": "JOIN OUR COMMUNITY",
+            "info": "Add button text to encourage users to join the community."
+        },
+        {
+            "type": "url",
+            "id": "community_button_link",
+            "label": "Community Link",
+            "info": "Add the URL link for the 'Join Our Community' button."
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Health Tips",
+            "type": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "health_tips_image",
+                    "label": "Health Tips Image",
+                    "info": "Select an image to illustrate the health tip."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Health Tips",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,137 @@
+<!-- testimonial sec start -->
+{% if section.settings.enable_section != false %}
+  <section class="testimonial-sec">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5">
+          <div class="testimonial-content-box">
+            {% if section.settings.testimonial_heading != blank %}
+              <h3>{{ section.settings.testimonial_heading | default: 'What our health heroes say?' }}</h3>
+            {% endif %}
+            {% if section.settings.testimonial_description != blank %}
+              <p>
+                {{
+                  section.settings.testimonial_description
+                  | default: "Celebrated health heroes share their experiences with our products, revealing how they've dramatically improved their wellness routines. Discover their inspiring stories and life-changing results right here."
+                }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="testimonial-wrap">
+            <div class="owl-carousel owl-theme testimonial-slider">
+              {% for block in section.blocks %}
+                {% assign testimonial_img = block.settings.testimonial_img %}
+                {% assign testimonial_text = block.settings.testimonial_text
+                  | default: 'Transformed my skin and hair health with just a few drops - this oil is a true game-changer!'
+                %}
+                {% assign start_rating = block.settings.start_rating | default: 5 %}
+                {% assign author_name = block.settings.author_name %}
+                <div class="item">
+                  <div class="testimonial-box">
+                    {% if testimonial_img != blank %}
+                      <div class="testimonial-img">
+                        <img src="{{ testimonial_img | img_url: 'master' }}" alt="" width="" height="">
+                      </div>
+                    {% endif %}
+                    <div class="testimonial-content">
+                      {% if testimonial_text != blank %}
+                        <p>{{ testimonial_text }}</p>
+                      {% endif %}
+                      <div class="rating">
+                        <ul>
+                          {% for i in (1..start_rating) %}
+                            <li><i class="fa-solid fa-star"></i></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                      {% if author_name != blank %}
+                        <div class="author-name">
+                          <p>{{ author_name }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+<!-- testimonial sec end -->
+
+{% schema %}
+{
+    "name": "Organic Testimonial",
+    "class": "organic-testimonial",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the testimonial section."
+        },
+        {
+            "type": "text",
+            "id": "testimonial_heading",
+            "label": "Testimonial Headline",
+            "default": "What our health heroes say?",
+            "info": "Add the heading for the testimonial section."
+        },
+        {
+            "type": "textarea",
+            "id": "testimonial_description",
+            "label": "Testimonial Description",
+            "info": "Add a brief description for the testimonial section."
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Testimonial",
+            "type": "Text",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "testimonial_img",
+                    "label": "Testimonial Image",
+                    "info": "Select an image for the testimonial."
+                },
+                {
+                    "type": "textarea",
+                    "id": "testimonial_text",
+                    "label": "Testimonial Text",
+                    "default": "Transformed my skin and hair health with just a few drops - this oil is a true game-changer!",
+                    "info": "Add the testimonial text."
+                },
+                {
+                    "type": "range",
+                    "id": "start_rating",
+                    "label": "Star Rating",
+                    "info": "Select the star rating for the testimonial.",
+                    "default": 5,
+                    "min": 1,
+                    "max": 5
+                },
+                {
+                    "type": "text",
+                    "id": "author_name",
+                    "label": "Author Name",
+                    "default": "Aisha Singh",
+                    "info": "Enter the name of the author."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Testimonial",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

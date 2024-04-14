@@ -1,0 +1,84 @@
+<!-- we are sec start -->
+{% if section.settings.enable_section != false %}
+  <section class="we-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% if section.settings.section_title != blank %}
+            <div class="title-heading-2">
+              <h2>{{ section.settings.section_title | default: 'We are certified by' }}</h2>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        {% for block in section.blocks %}
+          <div class="col-lg-3 col-md-6 cust-margin">
+            <div class="we-item">
+              {% if block.settings.image_url != blank %}
+                <div class="we-item-img">
+                  <img src="{{ block.settings.image_url | img_url: 'master' }}" alt="" width="" height="">
+                </div>
+              {% endif %}
+              {% if block.settings.content != blank %}
+                <div class="we-content">
+                  <p>{{ block.settings.content | default: 'Content goes here' }}</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+<!-- we are sec end -->
+
+{% schema %}
+{
+  "name": "Organic License",
+  "class": "organic-license",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true,
+      "info": "Check to enable the section."
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "We are certified by",
+      "info": "Enter the title for the section."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "License",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_url",
+          "label": "Image",
+          "info": "Select an image for this item."
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "info": "Enter the content for this item."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Organic License",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

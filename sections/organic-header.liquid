@@ -1,0 +1,57 @@
+<!-- header sec start -->
+<header class="header-sec fixed-top">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-8">
+        <div class="header-logo">
+          {% if section.settings.header_logo != blank %}
+            <a href="/">
+              <img src="{{ section.settings.header_logo | img_url: 'master' }}" alt="Header Logo" width="" height="">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6 col-4">
+        <div class="header-icon">
+          <ul>
+            <li>
+              <a href="{{ routes.cart_url }}"><i class="fa-solid fa-cart-shopping"></i></a>
+            </li>
+            <li>
+              <a href="{{ routes.account_url }}"><i class="fa-solid fa-circle-user"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- header sec end -->
+
+{% schema %}
+{
+    "name": "Organic Header",
+    "class": "organic-header",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the banner section."
+        },
+        {
+            "type": "image_picker",
+            "id": "header_logo",
+            "label": "Header Logo",
+            "info": "Add header logo here"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Header",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

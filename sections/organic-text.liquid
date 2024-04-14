@@ -1,0 +1,69 @@
+<!-- pure sec start -->
+<section class="pure-sec">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-9">
+        <div class="pure-content">
+          {% if section.settings.section_text != blank %}
+            <h2>{{ section.settings.section_text | replace: '<span>', '<span>' | replace: '</span>', '</span>' }}</h2>
+          {% endif %}
+          {% if section.settings.section_description != blank %}
+            <p>{{ section.settings.section_description }}</p>
+          {% endif %}
+          {% if section.settings.section_button_link and section.settings.section_button %}
+            <a href="{{ section.settings.section_button_link }}">{{ section.settings.section_button }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- pure sec end -->
+
+{% schema %}
+{
+    "name": "Organic Text",
+    "class": "organic-text",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the banner section."
+        },
+        {
+            "type": "text",
+            "id": "section_text",
+            "label": "Section Heading",
+            "default": "<span>Pure Oil</span> Pure You",
+            "info": "Add section text here"
+        },
+        {
+            "type": "textarea",
+            "id": "section_description",
+            "label": "Section Description",
+            "info": "Add section description here"
+        },
+        {
+            "type": "text",
+            "id": "section_button",
+            "label": "Section Button",
+            "default": "Buy Now",
+            "info": "Add section button text here"
+        },
+        {
+            "type": "url",
+            "id": "section_button_link",
+            "label": "Section Button Link",
+            "info": "Add section button link here"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Text",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

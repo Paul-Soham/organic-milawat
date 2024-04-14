@@ -1,0 +1,130 @@
+{% assign default_check = section.settings.enable_section %}
+{% assign section_heading = section.settings.section_text %}
+
+{% if default_check %}
+<!-- claim sec start -->
+<section class="claim-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% if section_heading != blank %}
+          <div class="title-heading">
+            <h2>{{ section_heading | default: 'Are you tired of being mislead by labels claiming organic?' }}</h2>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      {%- for block in section.blocks -%}
+        <div class="col-lg-6 {% if forloop.index == 1 %}border-right{% endif %}">
+          <div class="bottle-box bottle{{ forloop.index }}">
+            <img
+              src="{{ block.settings.label_img | img_url: 'master' }}"
+              alt=""
+              width=""
+              height=""
+            >
+            <div class="bottle{{ forloop.index }}-content-1">
+              <p>{{ block.settings.label_text_1 }}</p>
+            </div>
+            <div class="bottle{{ forloop.index }}-content-2">
+              <p>{{ block.settings.label_text_2 }}</p>
+            </div>
+            <div class="bottle{{ forloop.index }}-content-3">
+              <p>{{ block.settings.label_text_3 }}</p>
+            </div>
+            <div class="bottle{{ forloop.index }}-content-4">
+              <p>{{ block.settings.label_text_4 }}</p>
+            </div>
+            <div class="bottle{{ forloop.index }}-content-5">
+              <p>{{ block.settings.label_text_5 }}</p>
+            </div>
+            <div class="bottle{{ forloop.index }}-content-6">
+              <p>{{ block.settings.label_text_6 }}</p>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+<!-- claim sec end -->
+{% endif %}
+
+{% schema %}
+{
+    "name": "Organic Label",
+    "class": "organic-label",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the banner section."
+        },
+        {
+            "type": "text",
+            "id": "section_text",
+            "label": "Section Heading",
+            "default": "Are you tired of being mislead by labels claiming organic?",
+            "info": "Add section text here"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Label Image",
+            "type": "image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "label_img",
+                    "label": "Label Image"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_1",
+                    "label": "Label",
+                    "default": "Toxic chemicals"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_2",
+                    "label": "Label",
+                    "default": "No affiliation with NGOs"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_3",
+                    "label": "Label",
+                    "default": "With preservatives that increase the shelf life"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_4",
+                    "label": "Label",
+                    "default": "No trace of raw materials that validate quality"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_5",
+                    "label": "Label",
+                    "default": "Lacks any organic certification"
+                },
+                {
+                    "type": "text",
+                    "id": "label_text_6",
+                    "label": "Label",
+                    "default": "No social cause attached to the product"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Label",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

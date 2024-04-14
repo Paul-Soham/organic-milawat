@@ -1,0 +1,86 @@
+<!-- banner sec start -->
+{% if section.settings.enable_section %}
+  <section class="banner-sec">
+    {% if section.settings.banner_image %}
+      <img
+        src="{{ section.settings.banner_image | img_url: 'master' }}"
+        alt="{{ section.settings.banner_title }}"
+        width=""
+        height=""
+      >
+    {% endif %}
+    
+    <div class="banner-content">
+      <div class="container">
+      <div class="banner-content-box">
+        {% if section.settings.banner_title %}
+          <h1>{{ section.settings.banner_title }}</h1>
+        {% endif %}
+        {% if section.settings.banner_description %}
+          <p>{{ section.settings.banner_description }}</p>
+        {% endif %}
+        {% if section.settings.button_text and section.settings.button_link %}
+          <div class="banner-btn-box">
+            <a href="{{ section.settings.button_link }}">{{ section.settings.button_text }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+  </section>
+{% endif %}
+<!-- banner sec end -->
+
+{% schema %}
+{
+    "name": "Organic Banner",
+    "class": "organic-banner",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the banner section."
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner Image",
+            "info": "Select the image for the banner."
+        },
+        {
+            "type": "text",
+            "id": "banner_title",
+            "label": "Banner Heading",
+            "default": "Milawat-free aur Fair bhi",
+            "info": "Enter the main heading for the banner."
+        },
+        {
+            "type": "textarea",
+            "id": "banner_description",
+            "label": "Banner Description",
+            "info": "Enter the description for the banner."
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Now",
+            "info": "Enter the text for the button."
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link URL",
+            "info": "Enter the URL the button should link to."
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Banner",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

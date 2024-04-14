@@ -1,0 +1,111 @@
+<!-- process sec start -->
+<section class="process-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-heading-2">
+          {% if section.settings.Process_heading != blank %}
+            <h2>{{ section.settings.Process_heading }}</h2>
+          {% endif %}
+          {% if section.settings.Process_description != blank %}
+            <p>{{ section.settings.Process_description }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for block in section.blocks %}
+        <div class="col-lg-4 col-md-6">
+          <div class="process-box">
+            <div class="process-number">
+              <h3>{{ forloop.index }}</h3>
+            </div>
+            {% if block.settings.enable_image %}
+              <div class="process-img">
+                {% if block.settings.Process_img %}
+                  <img src="{{ block.settings.Process_img | img_url: 'master' }}" alt="" width="" height="">
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if block.settings.enable_video %}
+              <div class="process-img">
+                <video loop muted playsinline autoplay="true" width="320px" height="415px">
+                  <source src="{{ block.settings.process_video.sources[1].url }}" >
+                </video>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- process sec end -->
+
+{% schema %}
+{
+    "name": "Organic Process",
+    "class": "organic-process",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the process section."
+        },
+        {
+            "type": "text",
+            "id": "Process_heading",
+            "label": "Process Headline",
+            "default": "Our Process",
+            "info": "Add a heading to show the process."
+        },
+        {
+            "type": "textarea",
+            "id": "Process_description",
+            "label": "Process Description",
+            "default": "Our perfect 3 P’s is what ensures <span>nemical</span> produce",
+            "info": "Add a brief description for the process section."
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Process",
+            "type": "Text",
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "enable_image",
+                    "label": "Enable Image",
+                    "info": "Check to enable the image."
+                },
+                {
+                    "type": "image_picker",
+                    "id": "Process_img",
+                    "label": "Process Image",
+                    "info": "Select an image to illustrate the process."
+                },
+                {
+                    "type": "checkbox",
+                    "id": "enable_video",
+                    "label": "Enable Video",
+                    "info": "Check to enable the video."
+                },
+                {
+                    "type": "video",
+                    "id": "process_video",
+                    "label": "Process Video",
+                    "info": "Select an video to illustrate the process."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Process",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}

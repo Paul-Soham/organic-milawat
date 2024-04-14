@@ -1,0 +1,202 @@
+{% assign default_check = section.settings.enable_section %}
+{% assign section_heading = section.settings.section_heading %}
+
+{% if default_check %}
+  <!-- product sec start -->
+  <section class="product-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-heading-2">
+            {% if section_heading != blank %}
+              <h2>{{ section_heading }}</h2>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {%- for product in collections.all.products -%}
+          {% for variant in product.variants %}
+            <div class="col-lg-4 col-md-6">
+              <div class="product-box">
+                <div class="prdouct-img">
+                  <img
+                    src="{{ product.featured_image.src | img_url: 'master' }}"
+                    alt="{{ product.title }}"
+                    width=""
+                    height=""
+                  >
+                </div>
+                <div class="prdouct-content">
+                  <p>{{ product.type }}</p>
+                  <h3>{{ product.title }}</h3>
+                  <p class="price-text">{{ product.price | money_with_currency }}</p>
+                  <div class="product-faq">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                      {%- if product.metafields.product.about_me != blank -%}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne_{{ product.id }}">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#flush-collapseOne_{{ product.id }}"
+                              aria-expanded="false"
+                              aria-controls="flush-collapseOne_{{ product.id }}"
+                            >
+                              About Me
+                            </button>
+                          </h2>
+                          <div
+                            id="flush-collapseOne_{{ product.id }}"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne_{{ product.id }}"
+                            data-bs-parent="#accordionFlushExample"
+                          >
+                            <div class="accordion-body">{{ product.metafields.product.about_me }}</div>
+                          </div>
+                        </div>
+                      {%- endif -%}
+                      {%- if product.metafields.product.ways_to_use != blank -%}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTwo_{{ product.id }}">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#flush-collapseTwo_{{ product.id }}"
+                              aria-expanded="false"
+                              aria-controls="flush-collapseTwo_{{ product.id }}"
+                            >
+                              Ways to use
+                            </button>
+                          </h2>
+                          <div
+                            id="flush-collapseTwo_{{ product.id }}"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingTwo_{{ product.id }}"
+                            data-bs-parent="#accordionFlushExample"
+                          >
+                            <div class="accordion-body">{{ product.metafields.product.ways_to_use }}</div>
+                          </div>
+                        </div>
+                      {%- endif -%}
+                      {%- if product.metafields.product.ingredients != blank -%}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingThree_{{ product.id }}">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#flush-collapseThree_{{ product.id }}"
+                              aria-expanded="false"
+                              aria-controls="flush-collapseThree_{{ product.id }}"
+                            >
+                              Ingredients
+                            </button>
+                          </h2>
+                          <div
+                            id="flush-collapseThree_{{ product.id }}"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingThree_{{ product.id }}"
+                            data-bs-parent="#accordionFlushExample"
+                          >
+                            <div class="accordion-body">{{ product.metafields.product.ingredients }}</div>
+                          </div>
+                        </div>
+                      {%- endif -%}
+                      {%- if product.metafields.product.origin != blank -%}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingFour_{{ product.id }}">
+                            <button
+                              class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#flush-collapseFour_{{ product.id }}"
+                              aria-expanded="false"
+                              aria-controls="flush-collapseFour_{{ product.id }}"
+                            >
+                              Origin
+                            </button>
+                          </h2>
+                          <div
+                            id="flush-collapseFour_{{ product.id }}"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingFour_{{ product.id }}"
+                            data-bs-parent="#accordionFlushExample"
+                          >
+                            <div class="accordion-body">{{ product.metafields.product.origin }}</div>
+                          </div>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                  <div class="tag-box">
+                    <p class="tag">
+                      {% for tag in product.tags %}
+                        {{ tag }}
+                        {% unless forloop.last %}, {% endunless %}
+                      {% endfor %}
+                    </p>
+                  </div>
+                  {% comment %}<a href="{{ product.url }}" class="product-btn">ADD TO CART</a>{% render 'buy-buttons' %}{% endcomment %}
+                  <form
+                    action="/cart/add/"
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="form-addtocart"
+                    data-product-form
+                    id="product-form-template--{{ variant.id }}__main"
+                  >
+                    <input type="hidden" name="id" value="{{ variant.id }}">
+                    <button
+                      id="ProductSubmitButton-template--{{ variant.id }}__main"
+                      class="product-btn"
+                      type="submit"
+                      value="Submit"
+                      title="{{ 'products.product.add_to_cart' | t }}"
+                    >
+                      <span>{{ 'products.product.add_to_cart' | t }}</span>
+                    </button>
+                  </form>
+                  
+                  
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  <!-- product sec end -->
+{% endif %}
+
+{% schema %}
+{
+  "name": "Organic Product",
+  "class": "organic-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable Section",
+      "default": true,
+      "info": "Check to enable the product section."
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Headline",
+      "default": "Our Products",
+      "info": "Add a heading here"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Organic Product",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

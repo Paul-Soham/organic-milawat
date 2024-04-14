@@ -1,0 +1,95 @@
+<!-- our team sec start -->
+<section class="team-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-heading-2">
+          {% if section.settings.team_text != blank %}
+            <h2>{{ section.settings.team_text }}</h2>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="owl-carousel owl-theme team-slider">
+        {% for block in section.blocks %}
+          <!-- <div class="col-lg-3 col-md-6"></div> -->
+            <div class="team-box team-member-{{ forloop.index }}">
+              <div class="team-img">
+                {% if block.settings.team_image != blank %}
+                  <img src="{{ block.settings.team_image | img_url: 'master' }}" alt="" width="" height="">
+                {% endif %}
+              </div>
+              <div class="team-content">
+                {% if block.settings.author_name != blank %}
+                  <h3>{{ block.settings.author_name }}</h3>
+                {% endif %}
+                {% if block.settings.author_description != blank %}
+                  <p>{{ block.settings.author_description }}</p>
+                {% endif %}
+              </div>
+            </div>
+          
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- our team sec end -->
+
+{% schema %}
+{
+    "name": "Organic Team",
+    "class": "organic-team",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_section",
+            "label": "Enable Section",
+            "default": true,
+            "info": "Check to enable the display of the team section."
+        },
+        {
+            "type": "text",
+            "id": "team_text",
+            "label": "Team Heading",
+            "default": "Our Team",
+            "info": "Add the heading for the team section."
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Team",
+            "type": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "team_image",
+                    "label": "Team Member Image",
+                    "info": "Upload an image of the team member."
+                },
+                {
+                    "type": "text",
+                    "id": "author_name",
+                    "label": "Author Name",
+                    "default": "Parul Sapra",
+                    "info": "Enter the name of the team member."
+                },
+                {
+                    "type": "textarea",
+                    "id": "author_description",
+                    "label": "Author Description",
+                    "default": "Working on a mission to make healthier communities",
+                    "info": "Provide a brief description of the team member and their role."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Organic Team",
+            "category": "Text"
+        }
+    ]
+}
+{% endschema %}
